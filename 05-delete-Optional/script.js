@@ -10,5 +10,26 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+    fetch("../../_shared/api.json")
+        .then(res => res.json())
+        .then(data => {
+
+            let heroesArr = data.heroes;
+            let idEl = document.getElementById("hero-id");
+
+            document.getElementById("run").addEventListener("click", () => {
+                
+                let indexToRemove = heroesArr.findIndex(hero => hero.id === +idEl.value);
+
+                if (indexToRemove === -1){
+                    window.alert("That index doesn't exist");
+                    idEl.value = "";
+                } else {
+                    heroesArr.splice(indexToRemove, 1);
+                    console.log(heroesArr);
+                    idEl.value = "";
+                };
+
+            });
+        });
 })();
